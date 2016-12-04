@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.corusel-my_inner>.item>img{
+    display: block;
+    height: 250px;
+    max-width:350px;
+    width: 350px;
+    max-height: 350px;
+}
+.navbar-brand {
+    padding: 0px;
+}
+.jumbotron{
+    background-color:#eee;
+    background: #eee;
+    display: table;
+    width:100%;
+}
+    .jumbotron-text p {
+    color:#a94442;
+}
+    .jumbotron-text h4{
+        color: #a94442;
+    }
+.quests_time{
+    weight:100%;
+    margin-top: 0px;
+}

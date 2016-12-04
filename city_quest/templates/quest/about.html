@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    HOME
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <section>
+            <div class="row">
+                {% for quest in quests %}
+                    <div class="col-md-12">
+                        <div>
+                            <div class=" panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a href="{% url 'quest' quest.id %}"> {{ quest.name }} </a>
+                                    </h4>
+                                </div>
+
+                                <div id="collapse3a" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div id="carousel-example-generic{{ quest.id }}" class="carousel slide"
+                                                     data-ride="carousel">
+                                                    <div class="carousel-inner corusel-my_inner">
+                                                        {% for photo in quest.photo_set.all %}
+                                                            {% if  forloop.first %}
+                                                                <div class="item active">
+                                                                    <img src="{% static  photo.name  %}"
+                                                                         alt="">
+                                                                </div>
+                                                            {% else %}
+                                                                <div class="item">
+                                                                    <img src="{% static  photo.name  %}"
+                                                                         alt="">
+                                                                </div>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- Элементы управления -->
+                                                    <a class="left carousel-control"
+                                                       href="#carousel-example-generic{{ quest.id }}"
+                                                       data-slide="prev">
+                                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                                    </a>
+                                                    <a class="right carousel-control"
+                                                       href="#carousel-example-generic{{ quest.id }}"
+                                                       data-slide="next">
+                                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>{{ quest.description }}</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4">
+                                            <p>
+                                                <a class="btn center-block btn-primary btn-large"
+                                                   href="{% url 'quest' quest.id %}"> Показать подробности
+                                                </a>
+                                            </p>
+
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block footer %}
+
+{% endblock %}

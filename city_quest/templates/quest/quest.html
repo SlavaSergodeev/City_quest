@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    {{ quest.name }}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <section>
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <div class=" panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    {{ quest.name }}
+                                </h4>
+                            </div>
+                            <div id="collapse3a" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div id="carousel-example-generic{{ quest.id }}" class="carousel slide"
+                                                 data-ride="carousel">
+                                                <div class="carousel-inner corusel-my_inner">
+                                                    {% for photo in quest.photo_set.all %}
+                                                        {% if  forloop.first %}
+                                                            <div class="item active">
+                                                                <img src="{% static photo.name %}"
+                                                                     alt="">
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="item">
+                                                                <img src="{% static photo.name %}"
+                                                                     alt="">
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                                <!-- Элементы управления -->
+                                                <a class="left carousel-control"
+                                                   href="#carousel-example-generic{{ quest.id }}"
+                                                   data-slide="prev">
+                                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                                </a>
+                                                <a class="right carousel-control"
+                                                   href="#carousel-example-generic{{ quest.id }}"
+                                                   data-slide="next">
+                                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p>{{ quest.description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                                <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordionTwo" href="#collapse2c">
+                                                        <div align="center">Начать квест</div>
+                                                    </a>
+                                                </h4>
+                                        </div>
+                                        <div id="collapse2c" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p>{{ quest.task }}
+                                                <form name="test" method="post"  action="input1.php">
+                                                <p>Уже прошли? Введите проверочное слово<Br>
+                                                <textarea name="comment" cols="40" rows="3"></textarea></p>
+                                                <p><input type="submit" value="Отправить"></p>
+                                                </form>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+-->
+
+{#                    <div class="col-md-12">#}
+{#                        <div class="panel panel-default">#}
+{#                                        <div class="panel-heading">#}
+{#                                            <h4 class="panel-title">#}
+{#                                                    <a data-toggle="collapse" data-parent="#accordionTwo" href="#collapse2c">#}
+{#                                                        <div align="center">Начать квест</div>#}
+{#                                                    </a>#}
+{#                                                </h4>#}
+{#                                        </div>#}
+{#                                        <div id="collapse2c" class="panel-collapse collapse">#}
+{#                                            <div class="panel-body">#}
+{#                                                <p>{{ quest.task }}#}
+{#                                                <form name="test" method="post"  action="input1.php">#}
+{#                                                <p>Уже прошли? Введите проверочное слово<Br>#}
+{#                                                <textarea name="comment" cols="40" rows="3"></textarea></p>#}
+{#                                                <p><input type="submit" value="Отправить"></p>#}
+{#                                                </form>#}
+{#                                                </p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+                        {% block content1 %}
+                            <p>
+                                <a class="btn center-block btn-primary btn-large"
+                                   href="{% url 'quest_start' quest.id %}"> Начать квест
+                                </a>
+                            </p>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+<h2 class="text-center">ТУТ БУДУТ КОМЕНТЫ</h2>
+{% endblock %}

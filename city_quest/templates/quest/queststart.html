@@ -1,0 +1,72 @@
+{% extends 'quest/quest.html' %}
+{% load staticfiles %}
+
+{% block content1 %}
+    <div class="jumbotron">
+        <div class="col-md-8 ">
+
+            <h3><span class="label label-primary">Задачи для квеста</span></h3>
+            <p>
+            <ol>
+                {% for task in quest_task %}
+                    <li>
+                        {{ task }}
+                    </li>
+                {% endfor %}
+            </ol>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <div class="quests_time jumbotron-text">
+                <h4>
+                    Дата начала квеста
+                </h4>
+                <p>
+                    {{ quest.start_date }}
+                </p>
+                <h4>
+                    Дата окончания квеста
+
+                </h4>
+                <p>
+                    {{ quest.end_date }}
+                </p>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <form action="/create_post/" method="post" id="post-form">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" name="name" value="Проверить"/>
+            </form>
+        </div>
+
+        {#        <div>#}
+        {#            {% ifequal request.method "POST" %}#}
+        {#                {% if not form.errors %}#}
+        {#                    <span class="form_message">ваши данные сохранены</span>#}
+        {#                {% endif %}#}
+        {#            {% endifequal %}#}
+        {#            <form action="{{ action }}" method="post" onsubmit="javascript:return#}
+        {#send_form(this);">#}
+        {#                <table class="tl_state">#}
+        {#                    {{ form }}#}
+        {#                </table>#}
+        {#                <br/>#}
+        {#                <input type="submit" value="Save"/>#}
+        {#            </form>#}
+        {#        </div>#}
+        {#        <div class="col-lg-12">#}
+        {##}
+        {#            <form action="/your-name/" method="post">#}
+        {#                {% csrf_token %}#}
+        {#                {{ form }}#}
+        {#                <input type="submit" value="Submit"/>#}
+        {#            </form>#}
+        {##}
+        {#        </div>#}
+
+</div>
+
+{% endblock %}
