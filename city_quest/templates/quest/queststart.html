@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="col-md-12">
-            <form action="/create_post/" method="post" id="post-form">
+            <form method="Post" id="post-form" >
                 {% csrf_token %}
                 {{ form }}
                 <input type="submit" name="name" value="Проверить"/>

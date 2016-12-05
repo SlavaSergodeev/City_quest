@@ -1,11 +1,8 @@
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.core.serializers import json
+import json
+
 from django.http import HttpResponse
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from  django import forms
-from django.views.generic import FormView
 
 from quest.models import Quest, Photo
 import re
@@ -15,8 +12,50 @@ class CheckQuestResultForm(forms.Form):
 
 
 
+def create_post(request, quest_id):
+    quests=Quest.objects.all()
+    quest_obj = get_object_or_404(Quest, id=quest_id)
+    print('fdsghjkhgdfsgjkhgfdsgdhfg', quest_obj)
+    # return render(request, 'quest/questfinish.html', {'quest': quest_obj, 'quests': quests})
+
+    if request.method == 'POST':
+
+        print('dfdddddddddd')
+        post_text = request.POST.get('the_post')
+        response_data = {}
+        print(post_text)
+        print(quest_obj.check)
+        # form = CheckQuestResultForm(request.POST)
+        if quest_obj.check == post_text:
+            # return render(request, 'quest/questfinish.html', {'quest': quest_obj, 'quests': quests})
+            print('вапр')
+            # post = request.POST(text=post_text)
+            # #
+            # print('dddddddddddddd',post.pk)
+
+            response_data['result'] = 'finish'
+            # response_data['postpk'] = post.pk
+            # response_data['text'] = post.text
+            # response_data['created'] = post.created.strftime('%B %d, %Y %I:%M %p')
+            # response_data['author'] = post.author.username
+
+            return HttpResponse(
+                json.dumps(response_data),
+                content_type="application/json"
+            )
+        else:
+            return HttpResponse(
+                json.dumps({"nothing to see": "this isn't happening"}),
+                content_type="application/json")
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type="application/json")
+
+
 def view_for_form(request):
     pass
+
 
 def home(request):
     """
@@ -45,18 +84,20 @@ def finish_quest(request, quest_id):
 
 
 def start_quest(request, quest_id):
+    print('вапраопавыэ')
     quest_obj = get_object_or_404(Quest, id=quest_id)
     quest_obj_task = re.split(r'[0-9]+\)', quest_obj.task)
     quest_obj_task = quest_obj_task[1:]
     quests = Quest.objects.all()
-
-    if request.method == 'POST':
-        form = CheckQuestResultForm(request.POST)
-        if form.is_valid() and quest_obj.check == form.cleaned_data['result']:
-            return render(request, 'quest/questfinish.html', {'quest': quest_obj, 'quests': quests})
-    else:
-
-        form = CheckQuestResultForm()
+    form = CheckQuestResultForm()
+    #
+    # if request.method == 'POST':
+    #     form = CheckQuestResultForm(request.POST)
+    #     if form.is_valid() and quest_obj.check == form.cleaned_data['result']:
+    #         return render(request, 'quest/questfinish.html', {'quest': quest_obj, 'quests': quests})
+    # else:
+    #
+    #     form = CheckQuestResultForm()
 
     context = {
         'quest': quest_obj,
