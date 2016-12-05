@@ -10,7 +10,12 @@ function create_post() {
             $('#id_result').val(''); // remove the value from the input
             console.log(json); // log the returned json to the console
             console.log("success"); // another sanity check
-            if (json['result']=='finish'){window.location.assign(json['result']);}
+            if ('result'in json){window.location.assign(json['result']);}
+            else {
+                $('#errors').text('Неправильный ответ');
+                $('#errors').show();
+                setTimeout(function(){$('#errors').fadeOut('fast')},3000);
+            }
 
         },
 
