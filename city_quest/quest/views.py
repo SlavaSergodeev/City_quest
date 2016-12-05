@@ -55,7 +55,12 @@ def finish_quest(request, quest_id):
         'quests': quests
     }
     return render(request, 'quest/questfinish.html', context)
-
+def our_team(request):
+    quests=Quest.objects.all()
+    context = {
+        'quests': quests
+    }
+    return render(request,'quest/team.html',context)
 
 def start_quest(request, quest_id):
     print('вапраопавыэ')

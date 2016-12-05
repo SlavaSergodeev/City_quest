@@ -32,3 +32,11 @@
     color: #a94442;
 
 }
+.profil>img{
+    margin-top: 10px;
+    display: block;
+    height: 250px;
+    max-width: 320px;
+    width: 320px;
+    max-height: 250px;
+}
