@@ -16,6 +16,8 @@ class Quest(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        default_related_name = 'Квесты'
 class Photo(models.Model):
     questID=models.ForeignKey('Quest')
     name=models.CharField(max_length=50, verbose_name="Название фото")
@@ -23,3 +25,4 @@ class Photo(models.Model):
     date=models.DateTimeField(verbose_name="Дата")
     def __str__(self):
         return self.text
+
