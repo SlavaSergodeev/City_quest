@@ -1,3 +1,4 @@
+
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,7 @@
 
     <title>{% block title %}{% endblock %} &ndash; Blog</title>
 
-<!--    <meta name="keywords" content="">-->
+    <!--    <meta name="keywords" content="">-->
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,500,700,800'
           rel='stylesheet' type='text/css'>
@@ -58,7 +59,7 @@ _________________________________________________________ -->
         <div id="top">
             <div class="container">
                 <div class="row">
-                    
+
                     <div class="col-xs-12">
                         <div class="social">
                             <a href="#" class="external facebook" data-animate-hover="pulse"><i
@@ -69,8 +70,13 @@ _________________________________________________________ -->
                         </div>
 
                         <div class="login">
-                            <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i>
-                                <span class="hidden-xs text-uppercase">Sign in</span></a>
+                            {% if username %}
+                                <a href={% url 'logout' %}>{{ username }}<i class="fa fa-sign-in"></i>
+                                <span class="hidden-xs text-uppercase">Logout</span></a>
+                            {% else %}
+                                <a href={% url 'login' %}><i class="fa fa-sign-in"></i>
+                                    <span class="hidden-xs text-uppercase">Sign in</span></a>
+                            {% endif %}
                             <a href="quest/customer-register.html"><i class="fa fa-user"></i> <span
                                     class="hidden-xs text-uppercase">Sign up</span></a>
                         </div>
@@ -92,9 +98,10 @@ _________________________________________________________ -->
                 <div class="container">
                     <div class="navbar-header">
 
-                        <a class="navbar-brand home" href={% url 'home'%}>
+                        <a class="navbar-brand home" href={% url 'home' %}>
                             <img src="{% static 'img/logo.png' %}" alt="Universal logo" class="hidden-xs hidden-sm">
-                            <img src="{% static 'img/logo-small.png' %}" alt="Universal logo" class="visible-xs visible-sm"><span
+                            <img src="{% static 'img/logo-small.png' %}" alt="Universal logo"
+                                 class="visible-xs visible-sm"><span
                                 class="sr-only">Universal - go to homepage</span>
                         </a>
                         <div class="navbar-buttons">
@@ -110,32 +117,32 @@ _________________________________________________________ -->
                     <div class="navbar-collapse collapse" id="navigation">
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown active" >
-                               <a href="{% url 'home'%}">Home</a>
-                                
+                            <li class="dropdown active">
+                                <a href="{% url 'home' %}">Home</a>
+
                             </li>
                             <li class="dropdown">
-                                 <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Quest <b
+                                <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Quest <b
                                         class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     {% for quest in quests %}
-                                    <li><a href="{% url 'quest' quest.id %}"> {{ quest.name }}</a>
-                                    </li>
+                                        <li><a href="{% url 'quest' quest.id %}"> {{ quest.name }}</a>
+                                        </li>
                                     {% endfor %}
 
                                 </ul>
                             </li>
-                                
+
                             <li class="dropdown">
-                               <a href ="{% url 'ourteam'%}">Our team</a>
-                                
+                                <a href="{% url 'ourteam' %}">Our team</a>
+
                             </li>
                             <li class="">
-                               <a href="quest/about.html">Profil</a>
-                                
+                                <a href="quest/about.html">Profil</a>
+
                             </li>
                             <!-- ========== FULL WIDTH MEGAMENU ================== -->
-                            
+
 
                         </ul>
 
@@ -180,7 +187,8 @@ _________________________________________________________ -->
                     </form>
 
                     <p class="text-center text-muted">Not registered yet?</p>
-                    <p class="text-center text-muted"><a href="quest/customer-register.html"><strong>Register now</strong></a>!
+                    <p class="text-center text-muted"><a href="quest/customer-register.html"><strong>Register
+                        now</strong></a>!
                         It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!
                     </p>
 
@@ -190,16 +198,16 @@ _________________________________________________________ -->
     </div>
 
     <div id="content">
-            {% block content %}
-            {% endblock %}
+        {% block content %}
+        {% endblock %}
     </div>
     <!-- /#content -->
 
     <!-- *** FOOTER ***
 _________________________________________________________ -->
 
-    <footer >
-        {% block footer  %}
+    <footer>
+        {% block footer %}
         {% endblock %}
     </footer>
     <!-- /#footer -->
@@ -229,12 +237,12 @@ _________________________________________________________ -->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script>
-        window.jQuery || document.write('<script src="quest/js/jquery-1.11.0.min.js"><\/script>')
+    window.jQuery || document.write('<script src="quest/js/jquery-1.11.0.min.js"><\/script>')
 
 </script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<script src="{%  static 'js/jquery.cookie.js' %}"></script>
+<script src="{% static 'js/jquery.cookie.js' %}"></script>
 <script src="quest/js/waypoints.min.js"></script>
 <script src="quest/js/jquery.counterup.min.js"></script>
 <script src="quest/js/jquery.parallax-1.1.3.js"></script>

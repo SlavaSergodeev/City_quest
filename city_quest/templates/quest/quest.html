@@ -57,66 +57,29 @@
                             </div>
                         </div>
                     </div>
-                    <!--
-                                <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordionTwo" href="#collapse2c">
-                                                        <div align="center">Начать квест</div>
-                                                    </a>
-                                                </h4>
-                                        </div>
-                                        <div id="collapse2c" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <p>{{ quest.task }}
-                                                <form name="test" method="post"  action="input1.php">
-                                                <p>Уже прошли? Введите проверочное слово<Br>
-                                                <textarea name="comment" cols="40" rows="3"></textarea></p>
-                                                <p><input type="submit" value="Отправить"></p>
-                                                </form>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
--->
+                    {% block content1 %}
+                        <p>
+                            {% if username %}
 
-{#                    <div class="col-md-12">#}
-{#                        <div class="panel panel-default">#}
-{#                                        <div class="panel-heading">#}
-{#                                            <h4 class="panel-title">#}
-{#                                                    <a data-toggle="collapse" data-parent="#accordionTwo" href="#collapse2c">#}
-{#                                                        <div align="center">Начать квест</div>#}
-{#                                                    </a>#}
-{#                                                </h4>#}
-{#                                        </div>#}
-{#                                        <div id="collapse2c" class="panel-collapse collapse">#}
-{#                                            <div class="panel-body">#}
-{#                                                <p>{{ quest.task }}#}
-{#                                                <form name="test" method="post"  action="input1.php">#}
-{#                                                <p>Уже прошли? Введите проверочное слово<Br>#}
-{#                                                <textarea name="comment" cols="40" rows="3"></textarea></p>#}
-{#                                                <p><input type="submit" value="Отправить"></p>#}
-{#                                                </form>#}
-{#                                                </p>#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                    </div>#}
-                        {% block content1 %}
-                            <p>
                                 <a class="btn center-block btn-primary btn-large"
                                    href="{% url 'quest_start' quest.id %}"> Начать квест
                                 </a>
-                            </p>
-                        {% endblock %}
-                    </div>
+                            {% else %}
+
+                                <a href="/auth/register/" class="btn center-block btn-primary btn-large"
+                                > Авторизируйтесь , чтобы начать квест
+                                </a>
+                            {% endif %}
+
+                        </p>
+                    {% endblock %}
                 </div>
             </div>
-
         </section>
     </div>
 
 {% endblock %}
 
 {% block footer %}
-<h2 class="text-center">ТУТ БУДУТ КОМЕНТЫ</h2>
+    <h2 class="text-center">ТУТ БУДУТ КОМЕНТЫ</h2>
 {% endblock %}

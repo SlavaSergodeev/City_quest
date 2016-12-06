@@ -1,15 +1,17 @@
 import json
 
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from  django import forms
+from django.contrib import auth
 
 from quest.models import Quest, Photo
 import re
 
+
 class CheckQuestResultForm(forms.Form):
     result = forms.CharField(label='Результат', max_length=50)
-
 
 
 def create_post(request, quest_id):
@@ -17,10 +19,8 @@ def create_post(request, quest_id):
     if request.method == 'POST':
         post_text = request.POST.get('the_post')
         if quest_obj.check == post_text:
-            return HttpResponse(
-                json.dumps({'result':'finish'}),
-                content_type="application/json"
-            )
+            return JsonResponse({'result': 'finish'}
+                                )
         else:
             return HttpResponse(
                 json.dumps({"nothing to see": "this isn't happening"}),
@@ -41,7 +41,8 @@ def home(request):
     photos = Photo.objects.all()
     context = {
         'quests': quests,
-        'photos': photos
+        'photos': photos,
+        'username': auth.get_user(request).username
     }
     return render(request, 'quest/about.html', context)
 
@@ -52,15 +53,20 @@ def finish_quest(request, quest_id):
 
     context = {
         'quest': quest_obj,
-        'quests': quests
+        'quests': quests,
+        'username': auth.get_user(request).username
     }
     return render(request, 'quest/questfinish.html', context)
+
+
 def our_team(request):
-    quests=Quest.objects.all()
+    quests = Quest.objects.all()
     context = {
-        'quests': quests
+        'quests': quests,
+        'username': auth.get_user(request).username
     }
-    return render(request,'quest/team.html',context)
+    return render(request, 'quest/team.html', context)
+
 
 def start_quest(request, quest_id):
     print('вапраопавыэ')
@@ -73,7 +79,8 @@ def start_quest(request, quest_id):
         'quest': quest_obj,
         'quest_task': quest_obj_task,
         'quests': quests,
-        'form': form
+        'form': form,
+        'username': auth.get_user(request).username
     }
     return render(request, 'quest/queststart.html', context)
 
@@ -83,7 +90,8 @@ def get_quest(request, quest_id):
     quests = Quest.objects.all()
     context = {
         'quests': quests,
-        'quest': ques_obj
+        'quest': ques_obj,
+        'username': auth.get_user(request).username
 
     }
     return render(request, 'quest/quest.html', context)
