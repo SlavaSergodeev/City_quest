@@ -1,15 +1,15 @@
-import json
-
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from  django import forms
+from django import forms
+
+import json
 
 from quest.models import Quest, Photo
 import re
 
+
 class CheckQuestResultForm(forms.Form):
     result = forms.CharField(label='Результат', max_length=50)
-
 
 
 def create_post(request, quest_id):
@@ -55,12 +55,15 @@ def finish_quest(request, quest_id):
         'quests': quests
     }
     return render(request, 'quest/questfinish.html', context)
+
+
 def our_team(request):
-    quests=Quest.objects.all()
+    quests = Quest.objects.all()
     context = {
         'quests': quests
     }
-    return render(request,'quest/team.html',context)
+    return render(request, 'quest/team.html', context)
+
 
 def start_quest(request, quest_id):
     print('вапраопавыэ')
