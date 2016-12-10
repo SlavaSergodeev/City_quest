@@ -1,55 +1,40 @@
-{% extends "base.html" %}
-{% block content %}
-    {% if username %}
-    <h1>Пользователь авторизован</h1>
-    <a href="{% url logout %}">Выйти</a>
-    {% else %}
-        <h1>Авторизация</h1>
-    <div >
-    <form action="/auth/login/" method="POST">
-        {% csrf_token %}
-        <label for="username">Имя пользовтаеля</label>
-        <input type="text" name="username" id="username">
-        <label for="password">Пароль</label>
-        <input type="password" name="password" id="password">
-        {% if login_error %}
-        <label class="error">{{ login_error }}</label>
-        {% endif %}
-    <input class="button" type="submit" value="Войти">
-    <div class="label ">
-        <a href="/auth/register/">Регистрация</a>
-    </div>
-    </form>
-    </div>
-    {% endif %}
-    {% endblock %}
-
-    {#{% if form.non_field_errors %}#}
-    {#{{ form.non_field_errors }}#}
-    {#{% endif %}#}
-    {##}
-    {#<form method="post" action="">#}
-    {#<dl class="register">#}
-    {#{% for field in form %}#}
-    {#    <dt>{{ field.label_tag }}</dt>#}
-    {#    <dd class="clearfix">{{ field }}#}
-    {#    {% if field.help_text %}<div class="clearfix">{{ field.help_text }}</div>{% endif %}#}
-    {#    {% if field.errors %}<div class="myerrors clearfix">{{ field.errors }}</div>{% endif %}#}
-    {#    </dd>#}
-    {#{% endfor %}#}
-    {#</dl>#}
-    {#<input type="submit" value="Вход" / class="clearfix">#}
-    {#</form>#}
-    {##}
-    {#<script type="text/javascript">#}
-    {#document.getElementById('id_username').focus()#}
-    {#</script>#}
-    {##}
-    {# <br/><br/>#}
-    {#<ul>#}
-    {#    <li><a href="{% url auth_password_reset %}">Забыли пароль?</a></li>#}
-    {#    <li><a href="{% url registration_register %}">Регистрация</a></li>#}
-    {#</ul>#}
-    {#{% endif %}#}
-
+{#<div class="modal" id="modal-1">#}
+{#    <div class="modal-dialog ">#}
+{#        <div class="modal-content">#}
+{#        <form action="/auth/login/" method="POST">#}
+{#            <div class="modal-header">#}
+{#                {% if username %}#}
+{#                    <h1>Пользователь авторизован</h1>#}
+{#                    <a href="{% url 'logout' %}">Выйти</a>#}
+{#                {% else %}#}
+{#                        <h1>Авторизация</h1>#}
+{#                    </div>#}
+{#                    <div class="modal-content">#}
+{##}
+{#                        {% csrf_token %}#}
+{#                        <div>#}
+{#                            <label for="username">Имя пользовтаеля</label>#}
+{#                            <input type="text" name="username" id="username">#}
+{#                        </div>#}
+{#                        <div>#}
+{#                            <label for="password">Пароль</label>#}
+{#                            <input type="password" name="password" id="password">#}
+{#                            {% if login_error %}#}
+{#                                <label class="error">{{ login_error }}</label>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{#                    <div class="modal-footer">#}
+{#                        <input class="button" type="submit" value="Войти">#}
+{#                        <div class="label ">#}
+{#                            <a href="{% url 'register' %}">Регистрация</a>#}
+{#                            <button class="btn btn-danger" type="button" data-#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    </form>#}
+{#                {% endif %}#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
 

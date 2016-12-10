@@ -1,4 +1,3 @@
-
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
@@ -72,13 +71,16 @@ _________________________________________________________ -->
                         <div class="login">
                             {% if username %}
                                 <a href={% url 'logout' %}>{{ username }}<i class="fa fa-sign-in"></i>
-                                <span class="hidden-xs text-uppercase">Logout</span></a>
+                                    <span class="hidden-xs text-uppercase">Logout</span></a>
                             {% else %}
-                                <a href={% url 'login' %}><i class="fa fa-sign-in"></i>
-                                    <span class="hidden-xs text-uppercase">Sign in</span></a>
+
+                                <a onclick="scr()" data-toggle="modal"><i
+                                        class="fa fa-sign-in" ></i>
+                                    <span  class="hidden-xs text-uppercase" >Sign in</span></a>
+
+                                <a href={% url 'register' %}><i class="fa fa-user"></i> <span
+                                        class="hidden-xs text-uppercase">Sign up</span></a>
                             {% endif %}
-                            <a href="quest/customer-register.html"><i class="fa fa-user"></i> <span
-                                    class="hidden-xs text-uppercase">Sign up</span></a>
                         </div>
 
                     </div>
@@ -163,40 +165,40 @@ _________________________________________________________ -->
     <!-- *** LOGIN MODAL ***
 _________________________________________________________ -->
 
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="Login">Customer login</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="quest/customer-orders.html" method="post">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="email_modal" placeholder="email">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" id="password_modal" placeholder="password">
-                        </div>
-
-                        <p class="text-center">
-                            <button class="btn btn-template-main"><i class="fa fa-sign-in"></i> Log in</button>
-                        </p>
-
-                    </form>
-
-                    <p class="text-center text-muted">Not registered yet?</p>
-                    <p class="text-center text-muted"><a href="quest/customer-register.html"><strong>Register
-                        now</strong></a>!
-                        It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!
-                    </p>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
+{#    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">#}
+{#        <div class="modal-dialog modal-sm">#}
+{##}
+{#            <div class="modal-content">#}
+{#                <div class="modal-header">#}
+{#                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>#}
+{#                    <h4 class="modal-title" id="Login">Customer login</h4>#}
+{#                </div>#}
+{#                <div class="modal-body">#}
+{#                    <form action="quest/customer-orders.html" method="post">#}
+{#                        <div class="form-group">#}
+{#                            <input type="text" class="form-control" id="email_modal" placeholder="email">#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            <input type="password" class="form-control" id="password_modal" placeholder="password">#}
+{#                        </div>#}
+{##}
+{#                        <p class="text-center">#}
+{#                            <button class="btn btn-template-main"><i class="fa fa-sign-in"></i> Log in</button>#}
+{#                        </p>#}
+{##}
+{#                    </form>#}
+{##}
+{#                    <p class="text-center text-muted">Not registered yet?</p>#}
+{#                    <p class="text-center text-muted"><a href="quest/customer-register.html"><strong>Register#}
+{#                        now</strong></a>!#}
+{#                        It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!#}
+{#                    </p>#}
+{##}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
     <div id="content">
         {% block content %}
         {% endblock %}
@@ -232,6 +234,46 @@ _________________________________________________________ -->
 
 </div>
 <!-- /#all -->
+<div class="modal" id="modal-1">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+        <form action="/" method="POST">
+            <div class="modal-header">
+                {% if username %}
+                    <h1>Пользователь авторизован</h1>
+                    <a href="{% url 'logout' %}">Выйти</a>
+                {% else %}
+                        <h1>Авторизация</h1>
+                    </div>
+                    <div class="modal-content">
+
+                        {% csrf_token %}
+                        <div>
+                            <label for="username">Имя пользовтаеля</label>
+                            <input type="text" name="username" id="username">
+                        </div>
+                        <div>
+                            <label for="password">Пароль</label>
+                            <input type="password" name="password" id="password">
+                            {% if login_error %}
+                                <label class="error">{{ login_error }}</label>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <input class="button" onclick="input()" type="submit" value="Войти">
+                        <div class="label ">
+                            <a href="/auth/register/">Регистрация</a>
+{#                            <button class="btn btn-danger" type="button" data-#}
+                        </div>
+                    </div>
+                    </form>
+                {% endif %}
+        </div>
+    </div>
+</div>
+
 
 <!-- #### JAVASCRIPT FILES ### -->
 

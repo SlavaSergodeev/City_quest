@@ -1,5 +1,3 @@
-import json
-
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
@@ -7,14 +5,17 @@ from  django import forms
 from django.contrib import auth
 
 from quest.models import Quest, Photo
+
 import re
+import json
+
 
 
 class CheckQuestResultForm(forms.Form):
     result = forms.CharField(label='Результат', max_length=50)
 
 
-def create_post(request, quest_id):
+def check_results_quest(request, quest_id):
     quest_obj = get_object_or_404(Quest, id=quest_id)
     if request.method == 'POST':
         post_text = request.POST.get('the_post')
@@ -31,7 +32,7 @@ def create_post(request, quest_id):
             content_type="application/json")
 
 
-def home(request):
+def base(request):
     """
 
     :param request:

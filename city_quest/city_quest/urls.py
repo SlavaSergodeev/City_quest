@@ -20,6 +20,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('quest.urls')),
-    url(r'^auth/', include('loginsys.urls')),
+    url(r'^custom_auth/', include('loginsys.urls')),
 
    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
